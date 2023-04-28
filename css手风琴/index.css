@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top center,#718497,#29323c);
+}
+
+.container {
+    display: flex;
+    width: 80vw;
+    max-width: 800px;
+    height: 600px;
+    overflow: hidden;
+}
+
+.item {
+    position: relative;
+    width: 80px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 30px;
+    /* 保持原有尺寸比例，裁剪长边 */
+    background-size: cover;
+    /* 定位背景图像为中间 */
+    background-position: center;
+    /* 过渡动画 */
+    transition: 0.5s cubic-bezier(0.05,0.61,0.41,0.95);
+    overflow: hidden;
+}
+
+.item .content {
+    display: flex;
+    position: absolute;
+    left: 20px;
+    right: 0;
+    bottom: 10px;
+    height: 40px;
+    transition: 0.5s cubic-bezier(0.05,0.61,0.41,0.95);
+}
+
+.item .content .icon {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.item.active {
+    flex: 1;
+    margin: 0;
+    border-radius: 0.1s;
+}
+
+.item.active .content {
+    bottom: 20px;
+    left: 20px;
+}
+
+.item .content .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    color: #fff;
+    width: 100%;
+}
+
+.item .content .text div {
+    width: calc(100% - 70px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.5s ease-out ;
+}
+
+.item .content .text .title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.item .content .text .sub{
+    transition-delay: 0.1s;
+}
+
+
+.item.active .content .text div {
+    opacity: 1;
+}
+
+.item.active:nth-child(1) i {
+    color: #f08d5b;
+}
+
+.item.active:nth-child(2) i {
+    color: #5ece03;
+}
+
+.item.active:nth-child(3) i {
+    color: #03bdce;
+}
+
+.item.active:nth-child(4) i {
+    color: #0351ce;
+}
+
+.item.active:nth-child(5) i {
+    color: #03cece;
+}
