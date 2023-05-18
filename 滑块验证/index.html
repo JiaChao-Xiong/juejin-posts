@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+        <title>Document</title>
+        <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            user-select: none;
+            /*禁止用户选中*/
+        }
+
+        .wrap {
+            width: 300px;
+            height: 40px;
+            background-color: #e8e8e8;
+            margin: 100px auto;
+            text-align: center;
+            line-height: 40px;
+            position: relative;
+        }
+
+        .rect {
+            position: relative;
+            width: 300px;
+            height: 100%;
+        }
+
+        .rec {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #00b894;
+        }
+
+        .silde {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 11;
+            box-sizing: border-box;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='wrap'>
+        <div class='rec'>
+            <div class='rect'>滑块拖拽验证
+                <div class='silde'></div>
+                </div>
+            </div>
+        </div>
+    <script>
+        //获取事件
+        var silde = document.querySelector('.silde');
+        var rec = document.querySelector('.rec');
+        var rect = document.querySelector('.rect');
+        var minusX; 
+
+        //注册事件
+        silde.onmousedown = function (e) { //鼠标点击事件，点击之后执行函数，获得点击位置的X坐标
+            var initX = e.clientX; //保存初始按下位置的 X坐标；
+            document.onmousemove = function (e) { //鼠标移动事件
+                var moveX = e.clientX;
+                minusX = moveX - initX;
+                if (minusX < 0) {
+                    minusX = 0;
+                }
+                if (minusX > 260) { //判断最大值
+                    minusX = 260;
+                    console.log('我到头了');
+                }
+                silde.style.left = minusX + 'px';
+                rec.style.width = minusX + 'px';
+                if (minusX >= 260) {
+                    rect.style.color = 'white';
+                    // img.src = 'sure.png';
+                    document.onmousemove = null;
+                    silde.onmousedown = null;
+                }
+            }
+        }
+        document.onmouseup = function () { //鼠标抬起事件
+            document.onmousemove = null; //不允许鼠标移动事件发生
+            console.log(111);
+            if (minusX < 260) { //如果没有到头
+                silde.style.left = 0; //设置一个 left值
+                rec.style.width = 0; //绿色背景层设置宽度
+            }
+        }
+    </script>
+</body>
+
+</html>
